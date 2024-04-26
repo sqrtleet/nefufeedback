@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: tg-mongo
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - /opt/tg_geo_db/mongo:/data/db
+    ports:
+      - "11943:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: test
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "7886:8081"
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: test
+      ME_CONFIG_BASICAUTH_PASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://test:test@$tg-mongo:27017/
