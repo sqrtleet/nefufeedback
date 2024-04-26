@@ -33,7 +33,8 @@ if __name__ == '__main__':
     Это только для создания записей в бд
     """
     local = 'mongodb://localhost:27017'
-    client = pymongo.MongoClient(local)
+    server = f"mongodb://test:test@test:27017/"
+    client = pymongo.MongoClient(server)
     db = client['test']
     col = db['feedbacks']
     create_feedbacks()
